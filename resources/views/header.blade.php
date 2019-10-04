@@ -118,7 +118,7 @@
                         <!-- The user image in the navbar-->
                         <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Tô Thành đẹp trai</span>
+                        <span class="hidden-xs">Dương</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
@@ -126,7 +126,7 @@
                             <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                Tô Thành đẹp trai - Web Developer
+                                Dương - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>

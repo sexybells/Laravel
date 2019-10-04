@@ -25,6 +25,7 @@
         @if(empty($users))
             <p>No Data</p>
         @else
+        <a href="{{ route('users.create') }}" class="btn btn-success">Create</a>
             <table class="table">
                 <thead>
                 <th>Name</th>
@@ -37,6 +38,8 @@
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td>{{ $user['birthday'] }}</td>
+                        <td><a href="#" class="btn btn-primary">Update</a></td>
+                        <td><a href="#" class="btn btn-danger">Delete</a></td>
                     </tr>
                 @endforeach
                 </tbody>

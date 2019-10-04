@@ -12,12 +12,13 @@
 use App\Models\User;
 use App\Models\Post;
 use Faker\Generator as Faker;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('route-starter', function () {
+Route::get('users/', function () {
     $users = User::all()->toArray();
 
     return view('starter', [
@@ -25,28 +26,30 @@ Route::get('route-starter', function () {
     ]);
 })->name('users.index');
 
-Route::get('users/{id}', function ($id) {
-    $user = User::find($id);
-    dd($user);
-})->name('users.show');
-
-Route::get('users/create', function (Faker $faker) {
-    // Code ...
+Route::post('users/store', function ( Request $request ) {
+$data = $request->all();
     $user = User::create([
-        'name' => 'thanhtm',
-        'email' => $faker->unique()->safeEmail,
-        'birthday' => $faker->date(),
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'birthday' => $data['birthday'],
         'password' => bcrypt('123456'),
     ]);
 
     return redirect()->route('users.index');
+})->name('users.store');
+
+Route::get('users/create', function () {
+    return view('create');
 });
+
+Route::view('users/create', 'users/create')->name('users.create');
+
+Route::get('users/{id}', function ($id) {
+    $user = User::find($id);
+})->name('users.show');
 
 Route::get('users/update/{id}', function ($id) {
     $user = User::find($id);
-//    $user->name = 'Thanh';
-//    $user->email = 'thanhtmph06914@fpt.edu.vn';
-//    $user->save();
 
     $user->update([
         'name' => 'Thanh dep trai',
