@@ -25,7 +25,15 @@ Route::get('users/', function () {
         'users' => $users
     ]);
 })->name('users.index');
+Route::get('post', function () {
+    $posts = factory(Post::class, 10)
+    ->make()
+    ->toArray();
 
+    return view('post', [
+        'posts' => $posts
+    ]);
+});
 Route::post('users/store', function ( Request $request ) {
 $data = $request->all();
     $user = User::create([
