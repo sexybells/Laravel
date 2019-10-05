@@ -31,15 +31,24 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Birthday</th>
+                <th>Post</th>
                 </thead>
                 <tbody>
+
                 @foreach($users as $user)
+
                     <tr>
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td>{{ $user['birthday'] }}</td>
+                        <td>{{ count($user['posts']) }}</td>
                         <td><a href="#" class="btn btn-primary">Update</a></td>
-                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                       <form action="{{ route('users.delete', $user['id']) }}" method="POST">
+                           @csrf
+<input type="hidden" value="{{  $user['id'] }}">
+                        <td><input type="submit" value="Delete" class="btn btn-danger"></td>
+
+                    </form>
                     </tr>
                 @endforeach
                 </tbody>

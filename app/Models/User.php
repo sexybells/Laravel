@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function posts(){
+        // Truyền vào khoá ngoại
+        return $this->hasMany(Post::class, 'user_id');
+    }
 }

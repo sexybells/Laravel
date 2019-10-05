@@ -19,21 +19,26 @@ Route::get('/', function () {
 });
 
 Route::get('users/', function () {
-    $users = User::all()->toArray();
+    $users = User::all();
+
+    foreach ($users as $key => $user) {
+       $user->posts;
+    //    dd($user->posts->count());
+    }
 
     return view('starter', [
-        'users' => $users
+        'users' => $users ->toArray()
     ]);
 })->name('users.index');
-Route::get('post', function () {
-    $posts = factory(Post::class, 10)
-    ->make()
-    ->toArray();
+// Route::get('post', function () {
+//     $posts = factory(Post::class, 10)
+//     ->make()
+//     ->toArray();
 
-    return view('post', [
-        'posts' => $posts
-    ]);
-});
+//     return view('post', [
+//         'posts' => $posts
+//     ]);
+// });
 Route::post('users/store', function ( Request $request ) {
 $data = $request->all();
     $user = User::create([
@@ -66,10 +71,21 @@ Route::get('users/update/{id}', function ($id) {
     return redirect()->route('users.index');
 });
 
-Route::get('users/delete/{id}', function ($id) {
+Route::post('users/delete/{id}', function ($id) {
     $user = User::find($id);
 
     $user->delete();
 
     return redirect()->route('users.index');
+})->name('users.delete');
+Route::get('post', function () {
+    $posts = \App\Models\Post::all();
+
+    foreach ($posts as $key => $post) {
+        $post->user;
+    }
+
+    return view('post', [
+                'posts' => $posts->toArray()
+            ]);
 });
