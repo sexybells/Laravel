@@ -21,18 +21,7 @@ Route::group([
     'prefix' => 'users',
     'name' => 'users.'
 ], function () {
-    Route::get('/', function () {
-        $users = User::all();
-
-        foreach ($users as $key => $user) {
-           $user->posts;
-        //    dd($user->posts->count());
-        }
-
-        return view('starter', [
-            'users' => $users ->toArray()
-        ]);
-    })->name('users.index');
+    Route::get('/','UserControllers@index')->name('users.index');
     // Route::get('post', function () {
     //     $posts = factory(Post::class, 10)
     //     ->make()
@@ -65,28 +54,13 @@ Route::group([
 
     //     );
     // });
-    Route::get('/update/{id}', function($id){
-        //....
-        $user = User::find($id);
-        // dd($user['id']);
-        return view('users/update',[
-            $name = 'name' => $user['name'],
-            $email= 'email' =>$user['email'],
-            $birthday = 'birthday'=> $user['birthday'],
-            $password = 'password'=>$user['password'],
-            $address = 'address'=>$user['address'],
-            $id ='id'=> $user['id'],
-        ]);
-
-    })->name('users.update');
+    Route::get('/update/{id}','UserControllers@edit')->name('users.update');
 
 
 
-    Route::view('/create', 'users/create')->name('users.create');
+    Route::get('create', 'UserControllers@create')->name('create');
 
-    Route::get('{id}', function ($id) {
-        $user = User::find($id);
-    })->name('users.show');
+    Route::get('{id}','UserController@show')->name('users.show');
 
     // Route::post('users/update/{id}', function ($id) {
     //     $user = User::find($id);
@@ -98,13 +72,7 @@ Route::group([
     //     return redirect()->route('users.index');
     // });
 
-    Route::post('delete/{id}', function ($id) {
-        $user = User::find($id);
-
-        $user->delete();
-
-        return redirect()->route('users.index');
-    })->name('users.delete');
+    Route::post('delete/{id}', 'UserControllers@destroy')->name('users.delete');
     Route::get('post', function () {
         $posts = \App\Models\Post::all();
 

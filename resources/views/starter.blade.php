@@ -25,7 +25,7 @@
         @if(empty($users))
             <p>No Data</p>
         @else
-        <a href="{{ route('users.create') }}" class="btn btn-success">Create</a>
+        <a href="{{ route('create') }}" class="btn btn-success">Create</a>
             <table class="table">
                 <thead>
                 <th>Name</th>
