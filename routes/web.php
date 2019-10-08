@@ -54,6 +54,30 @@ $data = $request->all();
 Route::get('users/create', function () {
     return view('create');
 });
+// Route::get('users/update/{id}', function ($id) {
+//     $users = DB::table('users')->select('*')->where('id',$id)->get();
+//     //  dd($users);
+
+//     return view('users/update',compact($users)
+
+//     );
+// });
+Route::get('users/update/{id}', function($id){
+    //....
+    $user = User::find($id);
+    // dd($user['id']);
+    return view('users/update',[
+        $name = 'name' => $user['name'],
+        $email= 'email' =>$user['email'],
+        $birthday = 'birthday'=> $user['birthday'],
+        $password = 'password'=>$user['password'],
+        $address = 'address'=>$user['address'],
+        $id ='id'=> $user['id'],
+    ]);
+
+})->name('users.update');
+
+
 
 Route::view('users/create', 'users/create')->name('users.create');
 
@@ -61,15 +85,15 @@ Route::get('users/{id}', function ($id) {
     $user = User::find($id);
 })->name('users.show');
 
-Route::get('users/update/{id}', function ($id) {
-    $user = User::find($id);
+// Route::post('users/update/{id}', function ($id) {
+//     $user = User::find($id);
 
-    $user->update([
-        'name' => 'Thanh dep trai',
-    ]);
+//     $user->update([
+//         'name' => 'Thanh dep trai',
+//     ]);
 
-    return redirect()->route('users.index');
-});
+//     return redirect()->route('users.index');
+// });
 
 Route::post('users/delete/{id}', function ($id) {
     $user = User::find($id);

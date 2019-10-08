@@ -43,12 +43,13 @@
                         <td>{{ $user['birthday'] }}</td>
                         <td>{{ count($user['posts']) }}</td>
                         <td><a href="#" class="btn btn-primary">Update</a></td>
-                       <form action="{{ route('users.delete', $user['id']) }}" method="POST">
+                       {{--  <form action="{{ route('users.delete',[$user['id']] ) }}" method="POST">
                            @csrf
 <input type="hidden" value="{{  $user['id'] }}">
                         <td><input type="submit" value="Delete" class="btn btn-danger"></td>
 
-                    </form>
+                    </form>  --}}
+                    <td><a href="{{ url('users/update',[ $user['id'] ]) }}">Update</a></td>
                     </tr>
                 @endforeach
                 </tbody>
