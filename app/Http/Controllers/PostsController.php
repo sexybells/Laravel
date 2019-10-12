@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-class UserControllers extends Controller
+use App\Models\Post;
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,15 +14,15 @@ class UserControllers extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $posts = Post::all();
 
-        foreach ($users as $key => $user) {
-           $user->posts;
+        foreach ($posts as $key => $post) {
+           $post->user;
         //    dd($user->posts->count());
         }
 
-        return view('starter', [
-            'users' => $users ->toArray()
+        return view('post', [
+            'posts' => $posts ->toArray()
         ]);
     }
 
@@ -33,7 +33,7 @@ class UserControllers extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        //
     }
 
     /**
@@ -44,16 +44,7 @@ class UserControllers extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'birthday' => $data['birthday'],
-            'password' => bcrypt('123456'),
-            // 'phone_number'=>$data['phone_number']
-        ]);
-
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -64,7 +55,7 @@ class UserControllers extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        //
     }
 
     /**
@@ -75,16 +66,7 @@ class UserControllers extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        // dd($user['id']);
-        return view('users/update',[
-            $name = 'name' => $user['name'],
-            $email= 'email' =>$user['email'],
-            $birthday = 'birthday'=> $user['birthday'],
-            $password = 'password'=>$user['password'],
-            $address = 'address'=>$user['address'],
-            $id ='id'=> $user['id'],
-        ]);
+        //
     }
 
     /**
@@ -96,7 +78,7 @@ class UserControllers extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -107,10 +89,6 @@ class UserControllers extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-
-        $user->delete();
-
-        return redirect()->route('users.index');
+        //
     }
 }

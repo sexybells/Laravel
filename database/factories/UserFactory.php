@@ -19,7 +19,9 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'birthday' => $faker->date(),
+        'phone_number' => $faker->randomDigit(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-
+        'role'=> $faker->randomDigit(),
+        'is_active'=> $faker->randomDigit(),
     ];
 });

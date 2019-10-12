@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{ $post['user_id'] }}</td>
                         <td>{{ $post['content'] }}</td>
-                        <td>{{ $post['user']['name'] }}</td>
+                         <td>{{ $post['user']['name'] }}</td>
 
 
                     </tr>

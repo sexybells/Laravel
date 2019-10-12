@@ -16,9 +16,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'birthday',
+        'phone_number',
         'email',
-        'password',
-        'birthday'
+        'role',
+        'is_active',
+        'password'
+
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -39,5 +43,6 @@ class User extends Authenticatable
     public function posts(){
         // Truyền vào khoá ngoại
         return $this->hasMany(Post::class, 'user_id');
+
     }
 }
