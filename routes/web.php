@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Post;
 use Faker\Generator as Faker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +31,9 @@ Route::group([
             'email' => $data['email'],
             'birthday' => $data['birthday'],
             'password' => bcrypt('123456'),
+            'phone_number'=>$data['phone_number'],
+            'role' => 1,'is_active' => 1,
+
         ]);
 
         return redirect()->route('users.index');
@@ -41,6 +45,8 @@ Route::group([
 
     Route::get('/update/{id}','UserControllers@edit')->name('users.update');
 
+
+    Route::post('edit','UserControllers@update')->name('users.edit');
 
 
     Route::get('create', 'UserControllers@create')->name('create');
@@ -54,40 +60,9 @@ Route::group([
 Route::group(['prefix' => 'post','name'=>'post'], function () {
     Route::get('/','PostsController@index')->name('post.index');
 });
+Route::group(['prefix' => 'comment','name'=>'comments'], function () {
+    Route::get('/','CommentsController@index')->name('comment.index');
+});
 
 
 
-// Route::view('users/create', 'users/create')->name('users.create');
-
-// Route::get('users/{id}', function ($id) {
-//     $user = User::find($id);
-// })->name('users.show');
-
-// // Route::post('users/update/{id}', function ($id) {
-// //     $user = User::find($id);
-
-// //     $user->update([
-// //         'name' => 'Thanh dep trai',
-// //     ]);
-
-// //     return redirect()->route('users.index');
-// // });
-
-// Route::post('users/delete/{id}', function ($id) {
-//     $user = User::find($id);
-
-//     $user->delete();
-
-//     return redirect()->route('users.index');
-// })->name('users.delete');
-// Route::get('post', function () {
-//     $posts = \App\Models\Post::all();
-
-//     foreach ($posts as $key => $post) {
-//         $post->user;
-//     }
-
-//     return view('post', [
-//                 'posts' => $posts->toArray()
-//             ]);
-// });

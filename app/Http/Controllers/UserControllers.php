@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Category;
 class UserControllers extends Controller
 {
     /**
@@ -50,7 +53,7 @@ class UserControllers extends Controller
             'email' => $data['email'],
             'birthday' => $data['birthday'],
             'password' => bcrypt('123456'),
-            // 'phone_number'=>$data['phone_number']
+            'phone_number'=>$data['phone_number']
         ]);
 
         return redirect()->route('users.index');
@@ -82,7 +85,7 @@ class UserControllers extends Controller
             $email= 'email' =>$user['email'],
             $birthday = 'birthday'=> $user['birthday'],
             $password = 'password'=>$user['password'],
-            $address = 'address'=>$user['address'],
+            $phone_number = 'phone_number'=>$user['phone_number'],
             $id ='id'=> $user['id'],
         ]);
     }
@@ -94,9 +97,16 @@ class UserControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-
+        $user = User::find($request->id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->birthday = $request->input('birthday');
+        $user->phone_number = $request->input('phone_number');
+        $user->password = $request->input('password');
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -110,7 +120,12 @@ class UserControllers extends Controller
         $user = User::find($id);
 
         $user->delete();
-
+        $comment=Comment::where('user_id', $id);
+        $comment->delete();
+        $comment=Post::where('user_id', $id);
+        $comment->delete();
+        $comment=Category::where('user_id', $id);
+        $comment->delete();
         return redirect()->route('users.index');
     }
 }

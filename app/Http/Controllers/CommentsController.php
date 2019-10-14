@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Comment;
 class CommentsController extends Controller
 {
     /**
@@ -14,7 +14,17 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+
+        foreach ($comments as $key => $comment) {
+           $comment->user;
+           $comment->post;
+
+        }
+
+        return view('comment', [
+            'comments' => $comments ->toArray()
+        ]);
     }
 
     /**

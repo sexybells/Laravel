@@ -20,7 +20,7 @@ class CreateTableUsers extends Migration
             $table->date('birthday');
             $table->string('email');
             $table->string('password');
-            $table->integer('role');
+            $table->integer('role')->default(1);
             $table->integer('is_active');
             $table->timestamps();
         });

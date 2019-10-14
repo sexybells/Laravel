@@ -43,6 +43,11 @@ class User extends Authenticatable
     public function posts(){
         // Truyền vào khoá ngoại
         return $this->hasMany(Post::class, 'user_id');
-
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class,'user_id');
+    }
+    public function categories(){
+        return $this->hasMany(Category::class,'user_id');
     }
 }

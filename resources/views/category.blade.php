@@ -1,6 +1,6 @@
 @extends('layouts')
 
-@section('title', 'Starter')
+@section('title', 'Category')
 
 @section('contents')
     <!-- Code -->
@@ -21,16 +21,16 @@
         <!-- Main content -->
         <!-- /.content -->
 
-        <h3 style="text-align: center">Post</h3>
+        <h3 style="text-align: center">Category</h3>
         @if(empty($posts))
             <p>No Data</p>
         @else
-            <a href="{{ route('create') }}" class="btn btn-success">Create</a>
+
             <table class="table">
                 <thead>
-                <th>ID</th>
-                <th>Created</th>
+                <th>user id</th>
                 <th>content</th>
+                <th>Created</th>
                 <th>Username</th>
 
                 </thead>
@@ -39,9 +39,9 @@
                 @foreach($posts as $post)
 
                     <tr>
-                        <td>{{ $post['id'] }}</td>
-                        <td>{{ $post['created_at'] }}</td>
+                        <td>{{ $post['user_id'] }}</td>
                         <td>{{ $post['content'] }}</td>
+
                         <td>{{ $post['user']['name'] }}</td>
 
 

@@ -21,30 +21,30 @@
         <!-- Main content -->
         <!-- /.content -->
 
-        <h3 style="text-align: center">Post</h3>
-        @if(empty($posts))
+        <h3 style="text-align: center">Comment</h3>
+        @if(empty($comments))
             <p>No Data</p>
         @else
-            <a href="{{ route('create') }}" class="btn btn-success">Create</a>
+
             <table class="table">
                 <thead>
                 <th>ID</th>
                 <th>Created</th>
                 <th>content</th>
                 <th>Username</th>
+                <th>Post ID</th>
 
                 </thead>
                 <tbody>
 
-                @foreach($posts as $post)
+                @foreach($comments as $comment)
 
                     <tr>
-                        <td>{{ $post['id'] }}</td>
-                        <td>{{ $post['created_at'] }}</td>
-                        <td>{{ $post['content'] }}</td>
-                        <td>{{ $post['user']['name'] }}</td>
-
-
+                        <td>{{ $comment['id'] }}</td>
+                        <td>{{ $comment['created_at'] }}</td>
+                        <td>{{ $comment['content'] }}</td>
+                        <td>{{ $comment['user']['name'] }}</td>
+                        <td>{{ $comment['post']['id'] }}</td>
                     </tr>
                 @endforeach
                 </tbody>
