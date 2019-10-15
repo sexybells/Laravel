@@ -25,7 +25,7 @@
         @if(empty($comments))
             <p>No Data</p>
         @else
-
+        <a href="{{ route('comments.create') }}" class="btn btn-success">Create</a>
             <table class="table">
                 <thead>
                 <th>ID</th>
@@ -45,12 +45,12 @@
                         <td>{{ $comment['content'] }}</td>
                         <td>{{ $comment['user']['name'] }}</td>
                         <td>{{ $comment['post']['id'] }}</td>
-                        <form action="{{ route('users.delete',[$user['id']] ) }}" method="POST">
+                        <form action="{{ route('comment.delete',$comment['id']) }}" method="POST">
                             @csrf
-                            <input type="hidden" value="{{  $user['id'] }}">
+                            <input type="hidden" value="{{  $comment['id'] }}">
                             <td><input type="submit" value="Delete" class="btn btn-danger"></td>
                         </form>
-                        <td><a href="{{ url('users/update',[ $user['id'] ]) }}" class="btn btn-primary">Update</a></td>
+                        <td><a href="{{ url('comment/update',[ $comment['id'] ]) }}" class="btn btn-primary">Update</a></td>
                     </tr>
                 @endforeach
                 </tbody>

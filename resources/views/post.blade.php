@@ -34,6 +34,7 @@
                 <th>content</th>
                 <th>Username</th>
 
+
                 </thead>
                 <tbody>
 
@@ -45,6 +46,8 @@
                         <td>{{ $post['created_at'] }}</td>
                         <td>{{ $post['content'] }}</td>
                         <td>{{ $post['user']['name'] }}</td>
+
+
 
                         <form action="{{ route('post.delete',[$post['id']] ) }}" method="POST">
                             @csrf

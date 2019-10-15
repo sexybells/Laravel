@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 class CommentsController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comments.create');
     }
 
     /**
@@ -45,7 +47,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $comment = Comment::create([
+            'content' => $data['content']
+
+        ]);
+
+        return redirect()->route('comment.index');
     }
 
     /**

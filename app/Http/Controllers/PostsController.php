@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
 class PostsController extends Controller
 {
     /**
@@ -19,6 +20,7 @@ class PostsController extends Controller
 
         foreach ($posts as $key => $post) {
            $post->user;
+            $post->comment;
         //    dd($user->posts->count());
         }
 
@@ -45,7 +47,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $post = Post::create([
+            'title' => $data['title'],
+            'content' => $data['content'],
+
+        ]);
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -108,6 +117,6 @@ class PostsController extends Controller
         $post->delete();
         $comment=Comment::where('post_id', $id);
         $comment->delete();
-
+        return redirect()->route('post.index');
     }
 }
