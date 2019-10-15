@@ -59,6 +59,13 @@ Route::group([
 });
 Route::group(['prefix' => 'post','name'=>'post'], function () {
     Route::get('/','PostsController@index')->name('post.index');
+    Route::get('delete/{id}','PostsController@destroy')->name('post.delete');
+    Route::get('create', 'PostsController@create')->name('create');
+    Route::get('/update/{id}','PostsController@edit')->name('post.update');
+
+
+    Route::post('edit','PostsController@update')->name('post.edit');
+
 });
 Route::group(['prefix' => 'comment','name'=>'comments'], function () {
     Route::get('/','CommentsController@index')->name('comment.index');

@@ -29,6 +29,7 @@
             <table class="table">
                 <thead>
                 <th>ID</th>
+                <th>Title</th>
                 <th>Created</th>
                 <th>content</th>
                 <th>Username</th>
@@ -40,11 +41,17 @@
 
                     <tr>
                         <td>{{ $post['id'] }}</td>
+                        <td>{{ $post['title'] }}</td>
                         <td>{{ $post['created_at'] }}</td>
                         <td>{{ $post['content'] }}</td>
                         <td>{{ $post['user']['name'] }}</td>
 
-
+                        <form action="{{ route('post.delete',[$post['id']] ) }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{  $post['id'] }}">
+                            <td><input type="submit" value="Delete" class="btn btn-danger"></td>
+                        </form>
+                        <td><a href="{{ url('post/update',[ $post['id'] ]) }}" class="btn btn-primary">Update</a></td>
                     </tr>
                 @endforeach
                 </tbody>

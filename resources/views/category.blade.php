@@ -43,7 +43,12 @@
                         <td>{{ $post['content'] }}</td>
 
                         <td>{{ $post['user']['name'] }}</td>
-
+                        <form action="{{ route('users.delete',[$user['id']] ) }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{  $user['id'] }}">
+                            <td><input type="submit" value="Delete" class="btn btn-danger"></td>
+                        </form>
+                        <td><a href="{{ url('users/update',[ $user['id'] ]) }}" class="btn btn-primary">Update</a></td>
 
                     </tr>
                 @endforeach

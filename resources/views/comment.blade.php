@@ -45,6 +45,12 @@
                         <td>{{ $comment['content'] }}</td>
                         <td>{{ $comment['user']['name'] }}</td>
                         <td>{{ $comment['post']['id'] }}</td>
+                        <form action="{{ route('users.delete',[$user['id']] ) }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{  $user['id'] }}">
+                            <td><input type="submit" value="Delete" class="btn btn-danger"></td>
+                        </form>
+                        <td><a href="{{ url('users/update',[ $user['id'] ]) }}" class="btn btn-primary">Update</a></td>
                     </tr>
                 @endforeach
                 </tbody>

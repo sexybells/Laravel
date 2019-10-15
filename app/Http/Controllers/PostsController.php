@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\User;
 class PostsController extends Controller
 {
     /**
@@ -33,7 +34,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -66,7 +67,15 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        // dd($user['id']);
+        return view('posts/update',[
+            $title = 'title' => $post['title'],
+            $content= 'content' =>$post['content'],
+            $id ='id'=> $post['id'],
+
+
+        ]);
     }
 
     /**
@@ -76,9 +85,14 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $post = Post::find($request->id);
+        $post->content = $request->input('content');
+        $post->title = $request->input('title');
+
+        $post->save();
+        return redirect()->route('post.index');
     }
 
     /**
@@ -89,6 +103,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+        $comment=Comment::where('post_id', $id);
+        $comment->delete();
+
     }
 }
