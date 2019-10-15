@@ -122,10 +122,10 @@ class UserControllers extends Controller
         $user->delete();
         $comment=Comment::where('user_id', $id);
         $comment->delete();
-        $comment=Post::where('user_id', $id);
-        $comment->delete();
-        $comment=Category::where('user_id', $id);
-        $comment->delete();
+        $post=Post::where('user_id', $id);
+        $post->delete();
+        $category=Category::where('user_id', $id);
+        $category->delete();
         return redirect()->route('users.index');
     }
 }
